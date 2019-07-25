@@ -41,6 +41,8 @@ Specify class `ArrayField` for a form field.
 <?php $form::end(); ?>
 ```
 
+`$model->phones` must be an array.
+
 You can see the result
 
 ![drawing](array-field.gif)

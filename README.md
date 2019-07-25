@@ -5,7 +5,7 @@ The extension build a form field for array attribute of a model.
 
 If you have array attributes in a model you can edit them using the extension.
 
-[![Build Status](https://travis-ci.org/Tigrov/yii2-array-field.svg?branch=master)](https://travis-ci.org/Tigrov/yii2-array-field)
+[![Latest Stable Version](https://poser.pugx.org/Tigrov/yii2-array-field/v/stable)](https://packagist.org/packages/Tigrov/yii2-array-field)
 
 It requires to use `Bootstrap` library.
 

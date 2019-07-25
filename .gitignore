@@ -1,0 +1,15 @@
+.idea
+
+# composer
+/vendor
+/composer.lock
+
+# phpunit
+phpunit.phar
+/phpunit.xml
+
+# coveralls
+coveralls.phar
+/build
+
+reply.log

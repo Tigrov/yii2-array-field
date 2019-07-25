@@ -1,0 +1,11 @@
+.array-field-wrapper {
+    margin-bottom: 0.5rem;
+}
+.array-field-wrapper .form-control {
+    display: inline-block;
+    width: auto;
+}
+.array-field-remove, .array-field-add {
+    width: 2.3rem;
+    vertical-align: unset !important;
+}

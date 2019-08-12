@@ -5,6 +5,8 @@ The extension build a form field for array attribute of a model.
 
 If you have array attributes in a model you can edit them using the extension.
 
+![drawing](array-field.gif)
+
 [![Latest Stable Version](https://poser.pugx.org/Tigrov/yii2-array-field/v/stable)](https://packagist.org/packages/Tigrov/yii2-array-field)
 
 It requires to use `Bootstrap` library.
@@ -43,9 +45,21 @@ Specify class `ArrayField` for a form field.
 
 `$model->phones` must be an array.
 
-You can see the result
+---------------
 
-![drawing](array-field.gif)
+Also it is possible to show it as input group.
+
+```
+<?php $form = ActiveForm::begin(); ?>
+    ...
+    <?= $form->field($model, 'phones', ['class' => ArrayField::class, 'isInputGroup' => true]) ?>
+    ...
+<?php $form::end(); ?>
+```
+
+The result with "input group".
+
+![drawing](input-group.png)
 
 License
 -------

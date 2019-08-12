@@ -11,9 +11,13 @@ class ArrayField extends ActiveField
 {
     public $fieldWrapperOptions = ['class' => 'array-field-wrapper'];
 
+    public $buttonWrapperOptions;
+
     public $options = ['class' => 'form-group array-field-group'];
 
     public $showNewFields = 1;
+
+    public $isInputGroup = false;
 
     /** @var string javascript function with arguments ($wrapper, id, name, index). It will be called after new field added. */
     public $jsInitFunction;
@@ -21,6 +25,11 @@ class ArrayField extends ActiveField
     public function init()
     {
         parent::init();
+
+        if ($this->isInputGroup) {
+            $this->fieldWrapperOptions['class'] = ltrim((!empty($this->fieldWrapperOptions['class']) ? $this->fieldWrapperOptions['class'] : '') . ' input-group');
+            $this->buttonWrapperOptions['class'] = ltrim((!empty($this->buttonWrapperOptions['class']) ? $this->buttonWrapperOptions['class'] : '') . ' input-group-append');
+        }
 
         ArrayFieldAsset::register(\Yii::$app->getView());
     }
@@ -53,6 +62,10 @@ class ArrayField extends ActiveField
                 $button = Html::button('+', ['class' => 'btn btn-success array-field-add']);
             } else {
                 $button = Html::button('&ndash;', ['class' => 'btn btn-danger array-field-remove']);
+            }
+
+            if ($this->buttonWrapperOptions !== null) {
+                $button = Html::tag('div', $button, $this->buttonWrapperOptions);
             }
 
             $content = $fields[$i] . ' ' . $button;

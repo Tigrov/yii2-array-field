@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @link https://github.com/Tigrov/yii2-array-field
+ * @author Sergei Tigrov <rrr-r@ya.ru>
+ */
 namespace tigrov\arrayField;
 
 use yii\bootstrap\ActiveField;
@@ -7,21 +10,41 @@ use yii\bootstrap\Html;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
+/**
+ * ArrayField is a form field class for attributes with array values
+ *
+ * Usage
+ * ```
+ * <?php $form = ActiveForm::begin(); ?>
+ * ...
+ * <?= $form->field($model, 'phones', ['class' => ArrayField::class]) ?>
+ * ...
+ * <?php $form::end(); ?>
+ * ```
+ */
 class ArrayField extends ActiveField
 {
+    /** @var array|null field wrapper options */
     public $fieldWrapperOptions = ['class' => 'array-field-wrapper'];
 
+    /** @var array|null wrapper options for buttons "add" and "remove" */
     public $buttonWrapperOptions;
 
+    /** @inheritDoc */
     public $options = ['class' => 'form-group array-field-group'];
 
-    public $showNewFields = 1;
+    /** @var int count of new attribute fields to display */
+    public $showNewFields = 0;
 
+    /** @var bool if true it will show the field as input group */
     public $isInputGroup = false;
 
     /** @var string javascript function with arguments ($wrapper, id, name, index). It will be called after new field added. */
     public $jsInitFunction;
 
+    /**
+     * @inheritDoc
+     */
     public function init()
     {
         parent::init();
@@ -35,6 +58,7 @@ class ArrayField extends ActiveField
     }
 
     /**
+     * Returns the attribute array value
      * @return array
      */
     public function getAttributeValue()
@@ -46,6 +70,10 @@ class ArrayField extends ActiveField
         return is_array($value) ? array_values($value) : [];
     }
 
+    /**
+     * Renders fields
+     * @param array $fields
+     */
     public function renderFields($fields)
     {
         $options = $this->fieldWrapperOptions;
@@ -73,6 +101,12 @@ class ArrayField extends ActiveField
         }
     }
 
+    /**
+     * Prepares field options
+     * @param array $options
+     * @param bool $merge
+     * @return array
+     */
     public function prepareOptions($options, $merge = true)
     {
         if ($merge) {
@@ -89,6 +123,11 @@ class ArrayField extends ActiveField
         return $options;
     }
 
+    /**
+     * Returns count of fields to display
+     * @param array $values
+     * @return int
+     */
     public function getCount($values)
     {
         return count($values) + $this->showNewFields ?: 1;
@@ -271,7 +310,7 @@ class ArrayField extends ActiveField
     }
 
     /**
-     * Returns the JS options for the field.
+     * Returns JS options for the field.
      * @return array the JS options.
      */
     protected function getClientOptions()
@@ -346,6 +385,12 @@ class ArrayField extends ActiveField
         ]);
     }
 
+    /**
+     * Returns JS options for an attribute
+     * @param array $options
+     * @param string $attribute
+     * @return array
+     */
     protected function getAttributeClientOptions($options, $attribute) {
         $inputID = $this->getInputId();
         $options['id'] = Html::getInputId($this->model, $attribute);
@@ -357,6 +402,9 @@ class ArrayField extends ActiveField
         return $options;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function render($content = null)
     {
         if ($content === null) {
